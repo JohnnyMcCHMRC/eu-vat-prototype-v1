@@ -1,0 +1,103 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Make an EU VAT claim – GOV.UK
+{% endblock %}
+
+{% block content %}
+
+<a href="/ra811-check-your-purchase-details" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-l">
+  Make an EU VAT claim
+</h1>
+
+<ul class="govuk-task-list">
+
+  <!-- COMPLETED – NOT CLICKABLE (GDS STANDARD) -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <span class="govuk-task-list__task-name">
+        Add claim details
+      </span>
+    </div>
+    <div class="govuk-task-list__status">
+      <strong class="govuk-tag govuk-tag--green">
+        Completed
+      </strong>
+    </div>
+  </li>
+
+  <!-- AVAILABLE – CLICKABLE -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link" href="/ra50-what-is-the-purchase">
+        Add a purchase
+      </a>
+    </div>
+    <div class="govuk-task-list__status">
+      <strong class="govuk-tag govuk-tag--blue">
+        Add to list
+      </strong>
+    </div>
+  </li>
+
+  <!-- AVAILABLE – CLICKABLE -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link" href="#">
+        Add an import
+      </a>
+    </div>
+    <div class="govuk-task-list__status">
+      <strong class="govuk-tag govuk-tag--blue">
+        Add to list
+      </strong>
+    </div>
+  </li>
+
+  <!-- AVAILABLE – CLICKABLE -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link" href="#">
+        Add or view supporting documents
+      </a>
+    </div>
+    <div class="govuk-task-list__status">
+      <strong class="govuk-tag govuk-tag--blue">
+        Add to list
+      </strong>
+    </div>
+  </li>
+
+  <!-- LOCKED – NOT CLICKABLE -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <span class="govuk-task-list__task-name">
+        Add bank details
+      </span>
+    </div>
+    <div class="govuk-task-list__status">
+      <strong class="govuk-tag govuk-tag--grey">
+        Cannot start yet
+      </strong>
+    </div>
+  </li>
+
+</ul>
+
+<p class="govuk-body">
+  <a class="govuk-link" href="/aa10-manage-eu-vat-claim">
+    Go to the claims dashboard
+  </a>
+</p>
+
+<p class="govuk-body">
+  <a class="govuk-link" href="#">
+    Delete claim
+  </a>
+</p>
+
+{% endblock %}
+``

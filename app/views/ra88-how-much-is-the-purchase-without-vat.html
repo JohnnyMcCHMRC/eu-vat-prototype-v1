@@ -1,0 +1,76 @@
+{% extends "layouts/main.html" %}
+
+{% set amountErrorMessage = null %}
+{% if errorPurchaseAmount %}
+  {% set amountErrorMessage = { text: "Enter the purchase amount without VAT" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorPurchaseAmount %}
+    Error: How much is the purchase without VAT? – EU VAT – GOV.UK
+  {% else %}
+    How much is the purchase without VAT? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra87-what-is-the-currency"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorPurchaseAmount %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the purchase amount without VAT",
+              href: "#purchaseAmount"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Add invoice details</span>
+      <h1 class="govuk-heading-l">How much is the purchase without VAT?</h1>
+
+      <p class="govuk-body">
+        Enter the value of the purchase minus the VAT amount paid.
+      </p>
+
+      <p class="govuk-body">
+        This will be itemised on the receipt, unless you have a simplified invoice,
+        in which case you may need to calculate it yourself.
+      </p>
+
+      <form method="post" action="/ra89-how-much-is-vat-amount-paid">
+
+        {{ govukInput({
+          id: "purchaseAmount",
+          name: "purchaseAmount",
+          classes: "govuk-input govuk-input--width-10",
+          inputmode: "decimal",
+          value: data["purchaseAmount"],
+          label: {
+            text: "Purchase amount without VAT",
+            classes: "govuk-visually-hidden"
+          },
+          prefix: {
+            text: "€"
+          },
+          errorMessage: amountErrorMessage
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+``

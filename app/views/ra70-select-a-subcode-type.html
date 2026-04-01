@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  What is the sub code type? – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra60-purchase-subcode.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add purchase details</span>
+
+      <h1 class="govuk-heading-l">
+        What is the sub code type?
+      </h1>
+
+      <p class="govuk-body">
+        Select an option.
+      </p>
+
+      <form method="post" action="/ra80-simplified-invoice">
+
+        {{ govukRadios({
+          idPrefix: "subCodeType",
+          name: "subCodeType",
+          items: [
+            { value: "petrol", text: "Petrol" },
+            { value: "diesel", text: "Diesel" },
+            { value: "lpg", text: "LPG" },
+            { value: "natural-gas", text: "Natural gas" },
+            { value: "bio-fuel", text: "Bio fuel" },
+            { value: "none", text: "None of the above" }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

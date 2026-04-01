@@ -1,0 +1,83 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+What is the business activity(s)? – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/ra23-eu-vat-contact-details"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add claim details</span>
+
+      <h1 class="govuk-heading-xl">
+        What is the business activity(s)?
+      </h1>
+
+      <p class="govuk-body">
+        The first business activity code has been entered for this claim. This is your four‑digit,
+        Standard Industrial Classification (SIC) listed for your business.
+      </p>
+
+      <p class="govuk-body">
+        If this claim relates to other business activities, you should enter the additional SIC codes
+        in the appropriate fields. You can find the codes on the
+        <a
+          class="govuk-link"
+          href="https://www.ons.gov.uk/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007"
+          target="_blank"
+          rel="noreferrer noopener">
+          Office for National Statistics website
+        </a>.
+      </p>
+
+      <form method="post" action="/ra40-eu-vat-claims-details-check-answers">
+
+        {{ govukInput({
+          id: "businessActivity1",
+          name: "businessActivity1",
+          value: data["businessActivity1"] or "",
+          label: { text: "Business activity 1" },
+          attributes: {
+            disabled: "disabled"
+          }
+        }) }}
+
+        {{ govukInput({
+          id: "businessActivity2",
+          name: "businessActivity2",
+          value: data["businessActivity2"] or "",
+          label: { text: "Business activity 2" },
+          hint: {
+            text: "Enter your SIC code or search term, for example “motor”"
+          }
+        }) }}
+
+        {{ govukInput({
+          id: "businessActivity3",
+          name: "businessActivity3",
+          value: data["businessActivity3"] or "",
+          label: { text: "Business activity 3" },
+          hint: {
+            text: "Enter your SIC code or search term, for example “motor”"
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+``

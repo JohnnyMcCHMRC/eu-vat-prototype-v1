@@ -1,0 +1,127 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+What is the refund period? – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/ra21-eu-vat-eu-member-state"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add claim details</span>
+
+      <h1 class="govuk-heading-xl">
+        What is the refund period?
+      </h1>
+
+      <p class="govuk-body">
+        Your refund period must:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>be in the past when you send your claim</li>
+        <li>not overlap with a period you have already claimed for</li>
+        <li>include all the import and invoice dates for the refund you are claiming</li>
+        <li>be at least 3 months long, unless it ends in December</li>
+      </ul>
+
+      <form method="post" action="/ra23-eu-vat-contact-details">
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="refund-start-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              <h2 class="govuk-fieldset__heading">
+                When is the refund period start date?
+              </h2>
+            </legend>
+
+            <div id="refund-start-hint" class="govuk-hint">
+              For example 03 2008
+            </div>
+
+            <div class="govuk-date-input" id="refundStart">
+              <div class="govuk-date-input__item">
+                <label class="govuk-label govuk-date-input__label" for="refundStartMonth">
+                  Month
+                </label>
+                <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-2"
+                  id="refundStartMonth"
+                  name="refundStartMonth"
+                  type="text"
+                  inputmode="numeric">
+              </div>
+
+              <div class="govuk-date-input__item">
+                <label class="govuk-label govuk-date-input__label" for="refundStartYear">
+                  Year
+                </label>
+                <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-4"
+                  id="refundStartYear"
+                  name="refundStartYear"
+                  type="text"
+                  inputmode="numeric">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset" role="group" aria-describedby="refund-end-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+              <h2 class="govuk-fieldset__heading">
+                When is the refund period end date?
+              </h2>
+            </legend>
+
+            <div id="refund-end-hint" class="govuk-hint">
+              For example 08 2010
+            </div>
+
+            <div class="govuk-date-input" id="refundEnd">
+              <div class="govuk-date-input__item">
+                <label class="govuk-label govuk-date-input__label" for="refundEndMonth">
+                  Month
+                </label>
+                <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-2"
+                  id="refundEndMonth"
+                  name="refundEndMonth"
+                  type="text"
+                  inputmode="numeric">
+              </div>
+
+              <div class="govuk-date-input__item">
+                <label class="govuk-label govuk-date-input__label" for="refundEndYear">
+                  Year
+                </label>
+                <input
+                  class="govuk-input govuk-date-input__input govuk-input--width-4"
+                  id="refundEndYear"
+                  name="refundEndYear"
+                  type="text"
+                  inputmode="numeric">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+``

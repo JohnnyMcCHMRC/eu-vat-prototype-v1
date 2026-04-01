@@ -1,0 +1,85 @@
+
+{% extends "layouts/main.html" %}
+
+{# Safe error objects to avoid Nunjucks parse errors #}
+{% set dateErrorMessage = null %}
+{% if errorInvoiceDate %}
+  {% set dateErrorMessage = { text: "Enter the invoice date" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorInvoiceDate %}
+    Error: What is the invoice date? – EU VAT – GOV.UK
+  {% else %}
+    What is the invoice date? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra83-vat-registration-number.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorInvoiceDate %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the invoice date",
+              href: "#invoiceDate-day"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Add invoice details</span>
+      <h1 class="govuk-heading-l">What is the invoice date?</h1>
+
+      <form method="post" action="/ra86-invoice-number" novalidate>
+
+        {{ govukDateInput({
+          id: "invoiceDate",
+          namePrefix: "invoiceDate",
+          fieldset: {
+            legend: {
+              text: "What is the invoice date?",
+              isPageHeading: false,
+              classes: "govuk-visually-hidden"
+            }
+          },
+          hint: {
+            text: "For example, 27 3 2025"
+          },
+          errorMessage: dateErrorMessage,
+          items: [
+            {
+              name: "day",
+              classes: "govuk-input--width-2",
+              value: data["invoiceDate-day"]
+            },
+            {
+              name: "month",
+              classes: "govuk-input--width-2",
+              value: data["invoiceDate-month"]
+            },
+            {
+              name: "year",
+              classes: "govuk-input--width-4",
+              value: data["invoiceDate-year"]
+            }
+          ]
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Which EU member state are you claiming back VAT from? – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/aa11-create-an-eu-vat-claim"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add claim details</span>
+
+      <h1 class="govuk-heading-xl">
+        Which EU member state are you claiming back VAT from?
+      </h1>
+
+      <form method="post" action="/ra22-eu-vat-refund-period">
+
+        {{ govukInput({
+          id: "euMemberState",
+          name: "euMemberState",
+          classes: "govuk-input--width-20",
+          label: {
+            text: "EU member state",
+            classes: "govuk-visually-hidden"
+          },
+          hint: {
+            text: "Start typing to find the EU member state"
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

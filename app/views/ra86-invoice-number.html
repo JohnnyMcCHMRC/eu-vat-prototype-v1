@@ -1,0 +1,68 @@
+
+{% extends "layouts/main.html" %}
+
+{% set invoiceNumberErrorMessage = null %}
+{% if errorInvoiceNumber %}
+  {% set invoiceNumberErrorMessage = { text: "Enter the invoice number" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorInvoiceNumber %}
+    Error: What is the invoice number? – EU VAT – GOV.UK
+  {% else %}
+    What is the invoice number? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra85-invoice-date.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorInvoiceNumber %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the invoice number",
+              href: "#invoiceNumber"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Add invoice details</span>
+      <h1 class="govuk-heading-l">What is the invoice number?</h1>
+
+      <form method="post" action="/ra87-what-is-the-currency">
+
+        {{ govukInput({
+          id: "invoiceNumber",
+          name: "invoiceNumber",
+          classes: "govuk-input govuk-input--width-20",
+          value: data["invoiceNumber"],
+          spellcheck: false,
+          autocomplete: "off",
+          label: {
+            text: "Invoice number",
+            classes: "govuk-visually-hidden"
+          },
+          hint: {
+            text: "A set of letters or numbers usually found at the top or bottom of the invoice"
+          },
+          errorMessage: invoiceNumberErrorMessage
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

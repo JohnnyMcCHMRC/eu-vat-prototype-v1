@@ -1,0 +1,86 @@
+{% extends "layouts/main.html" %}
+
+{# Build error message safely (avoids Nunjucks parseAggregate issues) #}
+{% set addressLine1ErrorMessage = null %}
+{% if errorAddressLine1 %}
+  {% set addressLine1ErrorMessage = { text: "Enter address line 1" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorAddressLine1 %}
+    Error: What is the supplier's address? – EU VAT – GOV.UK
+  {% else %}
+    What is the supplier's address? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra81-suppliers-name.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorAddressLine1 %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter address line 1",
+              href: "#supplierAddressLine1"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Provide invoice details</span>
+      <h1 class="govuk-heading-l">What is the supplier's address?</h1>
+
+      <p class="govuk-body">
+        Enter the supplier's address as it appears on the invoice or receipt.
+      </p>
+
+      <form method="post" action="/ra83-vat-registration-number" novalidate>
+
+        {{ govukInput({
+          id: "supplierAddressLine1",
+          name: "supplierAddressLine1",
+          label: { text: "Address line 1" },
+          classes: "govuk-input govuk-!-width-two-thirds",
+          autocomplete: "address-line1",
+          spellcheck: false,
+          value: data["supplierAddressLine1"],
+          errorMessage: addressLine1ErrorMessage
+        }) }}
+
+        {{ govukInput({
+          id: "supplierAddressLine2",
+          name: "supplierAddressLine2",
+          label: { text: "Address line 2 (optional)" },
+          classes: "govuk-input govuk-!-width-two-thirds",
+          autocomplete: "address-line2",
+          spellcheck: false,
+          value: data["supplierAddressLine2"]
+        }) }}
+
+        {{ govukInput({
+          id: "supplierAddressLine3",
+          name: "supplierAddressLine3",
+          label: { text: "Address line 3 (optional)" },
+          classes: "govuk-input govuk-!-width-two-thirds",
+          autocomplete: "address-line3",
+          spellcheck: false,
+          value: data["supplierAddressLine3"]
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

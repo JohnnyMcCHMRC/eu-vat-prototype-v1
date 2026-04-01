@@ -1,0 +1,9 @@
+{
+  "serviceName": "EU VAT",
+  "useServiceNavigation": true,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}

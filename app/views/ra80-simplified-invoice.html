@@ -1,0 +1,61 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Do you have a simplified invoice? – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra70-select-a-subcode-type.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add invoice details</span>
+
+      <h1 class="govuk-heading-l">
+        Do you have a simplified invoice?
+      </h1>
+
+      <p class="govuk-body">
+        Simplified invoices (for example, till receipts) are shorter types of invoices that are usually up to £250.
+      </p>
+
+      <p class="govuk-body">
+        Simplified invoices may not show net and VAT amounts separately.
+      </p>
+
+      <p class="govuk-body">
+        If the invoice does not show the net amount and VAT amount separately, you must calculate the split yourself so you can complete the required fields.
+      </p>
+
+      <form method="post" action="/ra81-suppliers-name">
+
+        {{ govukRadios({
+          idPrefix: "simplifiedInvoice",
+          name: "simplifiedInvoice",
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

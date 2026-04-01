@@ -1,0 +1,136 @@
+
+{% extends "layouts/main.html" %}
+
+{# ---------- SAFE PRE-COMPUTED VALUES (NO TERNARIES) ---------- #}
+
+{% set simplifiedInvoiceValue = "[answer]" %}
+{% if data["simplifiedInvoice"] %}
+  {% set simplifiedInvoiceValue = data["simplifiedInvoice"] %}
+{% endif %}
+
+{% set supplierNameValue = "[answer]" %}
+{% if data["supplierName"] %}
+  {% set supplierNameValue = data["supplierName"] %}
+{% endif %}
+
+{% set supplierAddressValue = "[answer]" %}
+{% if data["supplierAddressLine1"] %}
+  {% set supplierAddressValue = data["supplierAddressLine1"] %}
+{% endif %}
+
+{% set vatRegValue = "[answer]" %}
+{% if data["vatRegistrationNumber"] %}
+  {% set vatRegValue = data["vatRegistrationNumber"] %}
+{% endif %}
+
+{% set invoiceDateValue = "[answer]" %}
+{% if data["invoiceDate-day"] and data["invoiceDate-month"] and data["invoiceDate-year"] %}
+  {% set invoiceDateValue = data["invoiceDate-day"] ~ " " ~ data["invoiceDate-month"] ~ " " ~ data["invoiceDate-year"] %}
+{% endif %}
+
+{% set invoiceNumberValue = "[answer]" %}
+{% if data["invoiceNumber"] %}
+  {% set invoiceNumberValue = data["invoiceNumber"] %}
+{% endif %}
+
+{% set purchaseAmountValue = "[answer]" %}
+{% if data["purchaseAmount"] %}
+  {% set purchaseAmountValue = "€" ~ data["purchaseAmount"] %}
+{% endif %}
+
+{% set vatAmountPaidValue = "[answer]" %}
+{% if data["vatAmountPaid"] %}
+  {% set vatAmountPaidValue = "€" ~ data["vatAmountPaid"] %}
+{% endif %}
+
+{% set vatReclaimValue = "[answer]" %}
+{% if data["vatReclaimAmount"] %}
+  {% set vatReclaimValue = "€" ~ data["vatReclaimAmount"] %}
+{% endif %}
+
+{% block pageTitle %}
+  Check your purchase details – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra810-how-much-vat-are-you-claiming"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">Add purchase and invoice details</span>
+    <h1 class="govuk-heading-l">Check your purchase details</h1>
+
+    {{ govukSummaryList({
+      rows: [
+
+        {
+          key: { text: "Do you have a simplified invoice?" },
+          value: { text: simplifiedInvoiceValue },
+          actions: { items: [{ text: "Change", href: "/ra80-simplified-invoice" }] }
+        },
+
+        {
+          key: { text: "Supplier’s name" },
+          value: { text: supplierNameValue },
+          actions: { items: [{ text: "Change", href: "ra81-suppliers-name" }] }
+        },
+
+        {
+          key: { text: "Supplier’s address" },
+          value: { text: supplierAddressValue },
+          actions: { items: [{ text: "Change", href: "ra82-suppliers-address" }] }
+        },
+
+        {
+          key: { text: "VAT registration number" },
+          value: { text: vatRegValue },
+          actions: { items: [{ text: "Change", href: "ra83-vat-registration-number" }] }
+        },
+
+        {
+          key: { text: "Invoice date" },
+          value: { text: invoiceDateValue },
+          actions: { items: [{ text: "Change", href: "ra85-invoice-date" }] }
+        },
+
+        {
+          key: { text: "Invoice number" },
+          value: { text: invoiceNumberValue },
+          actions: { items: [{ text: "Change", href: "ra86-invoice-number" }] }
+        },
+
+        {
+          key: { text: "Amount paid without VAT" },
+          value: { text: purchaseAmountValue },
+          actions: { items: [{ text: "Change", href: "ra88-how-much-is-the-purchase-without-vat" }] }
+        },
+
+        {
+          key: { text: "VAT amount paid" },
+          value: { text: vatAmountPaidValue },
+          actions: { items: [{ text: "Change", href: "ra89-how-much-is-vat-amount-paid" }] }
+        },
+
+        {
+          key: { text: "VAT being reclaimed" },
+          value: { text: vatReclaimValue },
+          actions: { items: [{ text: "Change", href: "ra810-how-much-vat-are-you-claiming" }] }
+        }
+
+      ]
+    }) }}
+
+    <form method="post" action="/ra812-claims-details-purchase-added-to-list">
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
+``

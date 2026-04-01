@@ -1,0 +1,72 @@
+
+{% extends "layouts/main.html" %}
+
+{% set reclaimErrorMessage = null %}
+{% if errorVatReclaim %}
+  {% set reclaimErrorMessage = { text: "Enter the VAT amount you are claiming" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorVatReclaim %}
+    Error: How much VAT are you claiming? – EU VAT – GOV.UK
+  {% else %}
+    How much VAT are you claiming? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra810-how-much-vat-are-you-claiming"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorVatReclaim %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the VAT amount you are claiming",
+              href: "#vatReclaimAmount"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Add invoice details</span>
+      <h1 class="govuk-heading-l">How much VAT are you claiming?</h1>
+
+      <p class="govuk-body">
+        This is the amount of VAT that you are entitled to claim and may be less than the amount of VAT paid.
+      </p>
+
+
+      <form method="post" action="ra811-check-your-purchase-details">
+
+        {{ govukInput({
+          id: "vatReclaimAmount",
+          name: "vatReclaimAmount",
+          classes: "govuk-input govuk-input--width-10",
+          inputmode: "decimal",
+          value: data["vatReclaimAmount"],
+          label: {
+            text: "VAT amount you are claiming",
+            classes: "govuk-visually-hidden"
+          },
+          prefix: {
+            text: "€"
+          },
+          errorMessage: reclaimErrorMessage
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

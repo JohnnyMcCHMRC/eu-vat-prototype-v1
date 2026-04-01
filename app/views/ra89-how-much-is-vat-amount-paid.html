@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% set vatAmountErrorMessage = null %}
+{% if errorVatAmount %}
+  {% set vatAmountErrorMessage = { text: "Enter the VAT amount paid" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorVatAmount %}
+    Error: How much is the VAT amount paid? – EU VAT – GOV.UK
+  {% else %}
+    How much is the VAT amount paid? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra88-how-much-is-the-purchase-without-vat"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorVatAmount %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the VAT amount paid",
+              href: "#vatAmountPaid"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Provide invoice details</span>
+      <h1 class="govuk-heading-l">How much is the VAT amount paid?</h1>
+
+      <p class="govuk-body">
+        Enter the amount of VAT paid. Refer to the invoice for details of the exact amount.
+      </p>
+
+      <p class="govuk-body">
+        This may not be shown on a simplified invoice, in which case you will have to calculate it yourself.
+      </p>
+
+      <form method="post" action="/ra810-how-much-vat-are-you-claiming">
+
+        {{ govukInput({
+          id: "vatAmountPaid",
+          name: "vatAmountPaid",
+          classes: "govuk-input govuk-input--width-10",
+          inputmode: "decimal",
+          value: data["vatAmountPaid"],
+          label: {
+            text: "VAT amount paid",
+            classes: "govuk-visually-hidden"
+          },
+          prefix: {
+            text: "€"
+          },
+          errorMessage: vatAmountErrorMessage
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+``

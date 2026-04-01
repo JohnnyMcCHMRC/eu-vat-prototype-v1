@@ -1,0 +1,70 @@
+{% extends "layouts/main.html" %}
+
+{# Build error message safely (avoids Nunjucks parseAggregate issues) #}
+{% set vatRegErrorMessage = null %}
+{% if errorVatReg %}
+  {% set vatRegErrorMessage = { text: "Enter the VAT registration number" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorVatReg %}
+    Error: What is the VAT registration number? – EU VAT – GOV.UK
+  {% else %}
+    What is the VAT registration number? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra82-suppliers-address.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorVatReg %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the VAT registration number",
+              href: "#vatRegistrationNumber"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Add invoice details</span>
+      <h1 class="govuk-heading-l">What is the VAT registration number?</h1>
+
+      <p class="govuk-body">
+        VAT registration numbers or tax identifiers may not show on a simplified invoice.
+        If you selected 'Yes' to having a simplified invoice, you only need to enter the VAT registration number if it's shown.
+      </p>
+
+      <form method="post" action="/ra85-invoice-date" novalidate>
+
+        {{ govukInput({
+          id: "vatRegistrationNumber",
+          name: "vatRegistrationNumber",
+          classes: "govuk-input govuk-input--width-20",
+          value: data["vatRegistrationNumber"],
+          spellcheck: false,
+          autocomplete: "off",
+          label: {
+            text: "VAT registration number",
+            classes: "govuk-visually-hidden"
+          },
+          errorMessage: vatRegErrorMessage
+        }) }}
+
+        {{ govukButton({ text: "Continue" }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

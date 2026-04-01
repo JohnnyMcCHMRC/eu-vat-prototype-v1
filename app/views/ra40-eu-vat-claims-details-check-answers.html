@@ -1,0 +1,91 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Check your claim details – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/ra24-eu-vat-business-activity"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add claim details</span>
+      <h1 class="govuk-heading-xl">Check your claim details</h1>
+
+      {% set refundStartDate = "[answer]" %}
+      {% if data["refundStartMonth"] and data["refundStartYear"] %}
+        {% set refundStartDate = data["refundStartMonth"] ~ " " ~ data["refundStartYear"] %}
+      {% endif %}
+
+      {% set refundEndDate = "[answer]" %}
+      {% if data["refundEndMonth"] and data["refundEndYear"] %}
+        {% set refundEndDate = data["refundEndMonth"] ~ " " ~ data["refundEndYear"] %}
+      {% endif %}
+
+      {% set applicantName = "[answer]" %}
+      {% if data["contactFirstName"] or data["contactLastName"] %}
+        {% set applicantName = (data["contactFirstName"] or "") ~ " " ~ (data["contactLastName"] or "") %}
+      {% endif %}
+
+      {% set contactDetails = "[answer]" %}
+      {% if data["contactEmail"] or data["contactTelephone"] %}
+        {% set contactDetails = (data["contactEmail"] or "") ~ " / " ~ (data["contactTelephone"] or "") %}
+      {% endif %}
+
+      {{ govukSummaryList({
+        rows: [
+
+          {
+            key: { text: "Refunding EU member state" },
+            value: { text: data["euMemberState"] or "[answer]" },
+            actions: { items: [{ href: "/ra21-eu-vat-eu-member-state", text: "Change" }] }
+          },
+
+          {
+            key: { text: "Refund period start date" },
+            value: { text: refundStartDate },
+            actions: { items: [{ href: "/ra22-eu-vat-refund-period", text: "Change" }] }
+          },
+
+          {
+            key: { text: "Refund period end date" },
+            value: { text: refundEndDate },
+            actions: { items: [{ href: "/ra22-eu-vat-refund-period", text: "Change" }] }
+          },
+
+          {
+            key: { text: "Applicant’s name" },
+            value: { text: applicantName },
+            actions: { items: [{ href: "/ra23-eu-vat-contact-details", text: "Change" }] }
+          },
+
+          {
+            key: { text: "Contact details" },
+            value: { text: contactDetails },
+            actions: { items: [{ href: "/ra23-eu-vat-contact-details", text: "Change" }] }
+          },
+
+          {
+            key: { text: "Business activity code" },
+            value: { text: data["businessActivity1"] or "[answer]" },
+            actions: { items: [{ href: "/ra24-eu-vat-business-activity", text: "Change" }] }
+          }
+
+        ]
+      }) }}
+
+      <!-- THIS LINE IS WHAT YOU WERE MISSING -->
+      <form method="post" action="/ra41-eu-vat-claim-details-completed">
+        {{ govukButton({ text: "Confirm and continue" }) }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

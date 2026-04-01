@@ -1,0 +1,73 @@
+
+{% extends "layouts/main.html" %}
+
+{# --- Build the error message once, so the object stays valid --- #}
+{% set supplierNameErrorMessage = null %}
+{% if errorSupplierName %}
+  {% set supplierNameErrorMessage = { text: "Enter the supplier's name" } %}
+{% endif %}
+
+{% block pageTitle %}
+  {% if errorSupplierName %}
+    Error: What is the supplier's name? – EU VAT – GOV.UK
+  {% else %}
+    What is the supplier's name? – EU VAT – GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra80-simplified-invoice.html"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if errorSupplierName %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: "Enter the supplier's name",
+              href: "#supplierName"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">Add invoice details</span>
+      <h1 class="govuk-heading-l">What is the supplier's name?</h1>
+
+      <p class="govuk-body">
+        You can find this on the invoice or receipt. The supplier is responsible for charging VAT.
+      </p>
+
+      <form method="post" action="/ra82-suppliers-address" novalidate>
+
+        {{ govukInput({
+          id: "supplierName",
+          name: "supplierName",
+          classes: "govuk-input govuk-!-width-one-half",
+          value: data["supplierName"],
+          autocomplete: "organization",
+          spellcheck: true,
+          label: {
+            text: "Supplier name",
+            classes: "govuk-visually-hidden"
+          },
+          errorMessage: supplierNameErrorMessage
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+``
