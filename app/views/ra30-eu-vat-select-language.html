@@ -1,0 +1,50 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+What language do you want to use for this claim? – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "ra24-eu-vat-business-activity"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Add claim details</span>
+
+      <form method="post" action="ra40-eu-vat-claims-details-check-answers">
+
+        {{ govukRadios({
+          name: "claimLanguage",
+          fieldset: {
+            legend: {
+              text: "What language do you want to use for this claim?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "All supporting documents must be uploaded in the language you select."
+          },
+          items: [
+            { value: "english", text: "English" },
+            { value: "French", text: "French" }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
+``

@@ -1,3 +1,4 @@
+
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
@@ -38,6 +39,10 @@
           ]
         }) }}
 
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
         {% set invoiceDetailsHtml %}
           <p class="govuk-body">
             Do not split the invoice over more than one line using the same purchase reference number.
@@ -63,12 +68,9 @@
           html: invoiceDetailsHtml
         }) }}
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
       </form>
 
     </div>
   </div>
 {% endblock %}
+``

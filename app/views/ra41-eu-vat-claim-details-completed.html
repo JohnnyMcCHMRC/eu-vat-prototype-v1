@@ -7,7 +7,7 @@ Make an EU VAT claim – GOV.UK
 
 {% block content %}
 
-<a href="/ra811-check-your-purchase-details" class="govuk-back-link">Back</a>
+<a href="/ra40-eu-vat-claims-details-check-answers" class="govuk-back-link">Back</a>
 
 <h1 class="govuk-heading-l">
   Make an EU VAT claim
@@ -15,12 +15,12 @@ Make an EU VAT claim – GOV.UK
 
 <ul class="govuk-task-list">
 
-  <!-- COMPLETED – NOT CLICKABLE (GDS STANDARD) -->
+  <!-- COMPLETED – CLICKABLE -->
   <li class="govuk-task-list__item">
     <div class="govuk-task-list__name-and-hint">
-      <span class="govuk-task-list__task-name">
+      <a class="govuk-link" href="/ra40-eu-vat-claims-details-check-answers">
         Add claim details
-      </span>
+      </a>
     </div>
     <div class="govuk-task-list__status">
       <strong class="govuk-tag govuk-tag--green">
@@ -57,11 +57,24 @@ Make an EU VAT claim – GOV.UK
     </div>
   </li>
 
-  <!-- AVAILABLE – CLICKABLE -->
+  <!-- VIEW PURCHASES AND IMPORTS – NOT CLICKABLE, NO "CANNOT START YET" -->
   <li class="govuk-task-list__item">
     <div class="govuk-task-list__name-and-hint">
-      <a class="govuk-link" href="#">
-        Add or view supporting documents
+      <span class="govuk-task-list__task-name">
+        View purchases and imports for this claim
+      </span>
+      <div class="govuk-task-list__hint">
+        You need to add a purchase or import before you can view them.
+      </div>
+    </div>
+    <div class="govuk-task-list__status"></div>
+  </li>
+
+  <!-- ADD SUPPORTING DOCUMENTS – CLICKABLE -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link" href="/ra61-add-supporting-documents">
+        Add supporting documents
       </a>
     </div>
     <div class="govuk-task-list__status">
@@ -71,16 +84,29 @@ Make an EU VAT claim – GOV.UK
     </div>
   </li>
 
-  <!-- LOCKED – NOT CLICKABLE -->
+  <!-- VIEW SUPPORTING DOCUMENTS – NOT CLICKABLE, NO "CANNOT START YET" -->
   <li class="govuk-task-list__item">
     <div class="govuk-task-list__name-and-hint">
       <span class="govuk-task-list__task-name">
-        Add bank details
+        View supporting documents
       </span>
+      <div class="govuk-task-list__hint">
+        You need to add supporting documents before you can view them.
+      </div>
+    </div>
+    <div class="govuk-task-list__status"></div>
+  </li>
+
+  <!-- BANK DETAILS – CLICKABLE -->
+  <li class="govuk-task-list__item">
+    <div class="govuk-task-list__name-and-hint">
+      <a class="govuk-link" href="/ra60-bank-details">
+        Add bank details
+      </a>
     </div>
     <div class="govuk-task-list__status">
-      <strong class="govuk-tag govuk-tag--grey">
-        Cannot start yet
+      <strong class="govuk-tag govuk-tag--blue">
+        Not started
       </strong>
     </div>
   </li>
@@ -100,4 +126,3 @@ Make an EU VAT claim – GOV.UK
 </p>
 
 {% endblock %}
-``
