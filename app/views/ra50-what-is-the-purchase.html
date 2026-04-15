@@ -2,7 +2,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  What is the purchase? – EU VAT – GOV.UK
+  Purchase type – EU VAT – GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -19,14 +19,26 @@
       <span class="govuk-caption-l">Add purchase details</span>
 
       <h1 class="govuk-heading-l">
-        What is the purchase?
+        Purchase type
       </h1>
 
       <p class="govuk-body">
-        Choose the purchase that best describes the main item on the invoice.
+        If the invoice includes more than one type of purchase, do not split the invoice over more than one line using the same purchase reference number.
+      </p>
+
+      <p class="govuk-body">
+        This may be treated as a duplicate entry and could delay or reject your claim.
+      </p>
+
+      <p class="govuk-body">
+        Instead, select ‘Other’ and itemise the different items and amounts in the purchase description, or select the highest-value item on the invoice.
       </p>
 
       <form method="post" action="/ra60-purchase-subcode">
+
+        <h2 class="govuk-heading-m">
+          What is the purchase type that best describes the item on your invoice?
+        </h2>
 
         {{ govukRadios({
           idPrefix: "purchaseType",
@@ -41,31 +53,6 @@
 
         {{ govukButton({
           text: "Continue"
-        }) }}
-
-        {% set invoiceDetailsHtml %}
-          <p class="govuk-body">
-            Do not split the invoice over more than one line using the same purchase reference number.
-            This may be treated as a duplicate entry and could delay or reject your claim.
-          </p>
-
-          <h3 class="govuk-heading-s">
-            What to do instead
-          </h3>
-
-          <ul class="govuk-list govuk-list--bullet">
-            <li>
-              select "Other" and itemise the different items and amounts in the purchase description, or
-            </li>
-            <li>
-              select the code that relates to the highest‑value item on the invoice
-            </li>
-          </ul>
-        {% endset %}
-
-        {{ govukDetails({
-          summaryText: "What to do if the invoice includes more than one type of purchase",
-          html: invoiceDetailsHtml
         }) }}
 
       </form>

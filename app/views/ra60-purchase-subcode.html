@@ -1,7 +1,8 @@
+
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  What is the fuel sub code? – EU VAT – GOV.UK
+  Fuel use – EU VAT – GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -18,14 +19,18 @@
       <span class="govuk-caption-l">Add purchase details</span>
 
       <h1 class="govuk-heading-l">
-        What is the fuel sub code?
+        Fuel use
       </h1>
 
       <p class="govuk-body">
-        Select the option that best describes the fuel purchase.
+        Fuel use can vary depending on the member state. If you’re unsure, check the guidance from the relevant tax authority before continuing.
       </p>
 
       <form method="post" action="ra70-select-a-subcode-type">
+
+        <h2 class="govuk-heading-m">
+          What is the fuel used for?
+        </h2>
 
         {{ govukRadios({
           idPrefix: "fuelSubCode",
@@ -70,24 +75,8 @@
           text: "Continue"
         }) }}
 
-        {% set memberStateRulesHtml %}
-          <p class="govuk-body">
-            Sub code requirements can vary by member state.
-          </p>
-
-          <p class="govuk-body">
-            If you are unsure which sub code applies, check the guidance from the relevant tax authority before continuing.
-          </p>
-        {% endset %}
-
-        {{ govukDetails({
-          summaryText: "Member state rules",
-          html: memberStateRulesHtml
-        }) }}
-
       </form>
 
     </div>
   </div>
 {% endblock %}
-``

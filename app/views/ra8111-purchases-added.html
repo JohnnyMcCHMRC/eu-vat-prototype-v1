@@ -1,0 +1,58 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Purchase details – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="ra811-check-your-purchase-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">Purchase details</span>
+
+    <h1 class="govuk-heading-l">
+      You have added 1 purchase
+    </h1>
+
+    {{ govukTable({
+      head: [
+        { text: "Purchase" },
+        { text: "VAT being reclaimed" }
+      ],
+      rows: [
+        [
+          { text: "Fuel" },
+          { text: "€1,000.00" }
+        ]
+      ]
+    }) }}
+
+    <form method="post" action="/ra812-claims-details-purchase-added-to-list">
+
+      <h2 class="govuk-heading-m">
+        Do you need to add another purchase?
+      </h2>
+
+      {{ govukRadios({
+        idPrefix: "addAnotherPurchase",
+        name: "addAnotherPurchase",
+        classes: "govuk-radios--inline",
+        items: [
+          { value: "yes", text: "Yes" },
+          { value: "no", text: "No" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
+``

@@ -1,7 +1,8 @@
+
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Do you have a simplified invoice? – EU VAT – GOV.UK
+  Simplified invoices – EU VAT – GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -15,10 +16,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <span class="govuk-caption-l">Add invoice details</span>
+      <span class="govuk-caption-l">Add purchase details</span>
 
       <h1 class="govuk-heading-l">
-        Do you have a simplified invoice?
+        Simplified invoices
       </h1>
 
       <p class="govuk-body">
@@ -26,7 +27,7 @@
       </p>
 
       <p class="govuk-body">
-        Simplified invoices may not show net and VAT amounts separately.
+        Simplified invoices may not show the split in net and VAT amounts.
       </p>
 
       <p class="govuk-body">
@@ -35,9 +36,14 @@
 
       <form method="post" action="/ra81-suppliers-name">
 
+        <h2 class="govuk-heading-m">
+          Do you have a simplified invoice?
+        </h2>
+
         {{ govukRadios({
           idPrefix: "simplifiedInvoice",
           name: "simplifiedInvoice",
+          classes: "govuk-radios--inline",
           items: [
             {
               value: "yes",
