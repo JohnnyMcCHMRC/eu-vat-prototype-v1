@@ -1,7 +1,21 @@
-
 {% extends "layouts/main.html" %}
 
 {# ---------- SAFE PRE-COMPUTED VALUES (NO TERNARIES) ---------- #}
+
+{% set purchaseTypeValue = "[answer]" %}
+{% if data["purchaseType"] %}
+  {% set purchaseTypeValue = data["purchaseType"] %}
+{% endif %}
+
+{% set fuelUseValue = "[answer]" %}
+{% if data["fuelUse"] %}
+  {% set fuelUseValue = data["fuelUse"] %}
+{% endif %}
+
+{% set fuelTypeValue = "[answer]" %}
+{% if data["fuelType"] %}
+  {% set fuelTypeValue = data["fuelType"] %}
+{% endif %}
 
 {% set simplifiedInvoiceValue = "[answer]" %}
 {% if data["simplifiedInvoice"] %}
@@ -70,6 +84,24 @@
       rows: [
 
         {
+          key: { text: "Purchase type" },
+          value: { text: purchaseTypeValue },
+          actions: { items: [{ text: "Change", href: "#" }] }
+        },
+
+        {
+          key: { text: "Fuel use" },
+          value: { text: fuelUseValue },
+          actions: { items: [{ text: "Change", href: "#" }] }
+        },
+
+        {
+          key: { text: "Type of fuel" },
+          value: { text: fuelTypeValue },
+          actions: { items: [{ text: "Change", href: "#" }] }
+        },
+
+        {
           key: { text: "Do you have a simplified invoice?" },
           value: { text: simplifiedInvoiceValue },
           actions: { items: [{ text: "Change", href: "/ra80-simplified-invoice" }] }
@@ -133,4 +165,3 @@
   </div>
 </div>
 {% endblock %}
-``
