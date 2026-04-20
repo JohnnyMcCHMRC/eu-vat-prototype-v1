@@ -9,7 +9,7 @@ Check your claim details – EU VAT – GOV.UK
 {% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
-    href: "/ra30-eu-vat-select-language"
+    href: "/ra41-eu-vat-claim-details-completed"
   }) }}
 {% endblock %}
 
@@ -47,24 +47,34 @@ Check your claim details – EU VAT – GOV.UK
       {% set claimLanguageText = data["claimLanguage"] %}
     {% endif %}
 
-    {# ✅ BUSINESS ACTIVITIES (1 mandatory, 2–3 optional) #}
-    {% set businessActivitiesHtml = "" %}
-
-    {% if data["businessActivity1"] %}
-      {% set businessActivitiesHtml =
-        "<div><strong>Business activity 1</strong><br>" ~ data["businessActivity1"] ~ "</div>" %}
-    {% endif %}
+    {# BUSINESS ACTIVITIES – FIXED ORDER, ACTIVITY 1 ALWAYS SHOWN #}
+    {% set businessActivity1Value = data["businessActivity1"] or "(answer)" %}
+    {% set businessActivitiesHtml =
+      "<div><strong>Business activity 1</strong><br>" ~ businessActivity1Value ~ "</div>"
+    %}
 
     {% if data["businessActivity2"] %}
       {% set businessActivitiesHtml =
         businessActivitiesHtml ~
-        "<div class='govuk-!-margin-top-2'><strong>Business activity 2</strong><br>" ~ data["businessActivity2"] ~ "</div>" %}
+        "<div class='govuk-!-margin-top-2'><strong>Business activity 2</strong><br>" ~ data["businessActivity2"] ~ "</div>"
+      %}
+    {% else %}
+      {% set businessActivitiesHtml =
+        businessActivitiesHtml ~
+        "<div class='govuk-!-margin-top-2'><strong>Business activity 2</strong><br>(answer)</div>"
+      %}
     {% endif %}
 
     {% if data["businessActivity3"] %}
       {% set businessActivitiesHtml =
         businessActivitiesHtml ~
-        "<div class='govuk-!-margin-top-2'><strong>Business activity 3</strong><br>" ~ data["businessActivity3"] ~ "</div>" %}
+        "<div class='govuk-!-margin-top-2'><strong>Business activity 3</strong><br>" ~ data["businessActivity3"] ~ "</div>"
+      %}
+    {% else %}
+      {% set businessActivitiesHtml =
+        businessActivitiesHtml ~
+        "<div class='govuk-!-margin-top-2'><strong>Business activity 3</strong><br>(answer)</div>"
+      %}
     {% endif %}
 
     {{ govukSummaryList({
@@ -74,7 +84,7 @@ Check your claim details – EU VAT – GOV.UK
           key: { text: "Refunding EU member state" },
           value: { text: data["euMemberState"] or "[answer]" },
           actions: {
-            items: [{ href: "/ra21-eu-vat-eu-member-state", text: "Change" }]
+            items: [{ href: "/ra40-eu-vat-claim-change-member-state", text: "Change" }]
           }
         },
 

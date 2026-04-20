@@ -2,7 +2,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Confirm the curency for this claim – EU VAT – GOV.UK
+  Currency for this claim – EU VAT – GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -17,19 +17,14 @@
     <div class="govuk-grid-column-two-thirds">
 
       <span class="govuk-caption-l">Add purchase details</span>
-      <h1 class="govuk-heading-l">What is the currency?</h1>
-
-      <p class="govuk-body">
-        If you’re claiming from a member state that does not use the euro,
-        you must enter all amounts in that country’s currency.
-      </p>
-
-      <p class="govuk-body">
-        If your invoices are in a different currency, convert the amounts before entering them.
-      </p>
+      <h1 class="govuk-heading-l">Currency for this claim</h1>
 
       <p class="govuk-body govuk-!-font-weight-bold">
         The currency for this claim is euro (EUR).
+      </p>
+
+      <p class="govuk-body">
+        If your invoices are in a different currency, convert the amounts to euros before entering them.
       </p>
 
       <form method="post" action="/ra88-how-much-is-the-purchase-without-vat">
@@ -42,4 +37,3 @@
     </div>
   </div>
 {% endblock %}
-``

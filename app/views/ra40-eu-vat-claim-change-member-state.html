@@ -1,0 +1,80 @@
+
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Change the EU member state – EU VAT – GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/ra40-eu-vat-claims-details-check-answers"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <span class="govuk-caption-l">Claim details</span>
+    <h1 class="govuk-heading-l">Change the EU member state</h1>
+
+    <p class="govuk-body">
+      You cannot change the EU member state for an existing claim.
+      To claim VAT back from a different EU member state, you must start a new claim.
+    </p>
+
+    <p class="govuk-body">
+      Starting a new claim will delete this claim and remove all the details you’ve entered.
+    </p>
+
+    <form id="change-eu-member-state-form" novalidate>
+      {{ govukRadios({
+        idPrefix: "changeEuMemberState",
+        name: "changeEuMemberState",
+        fieldset: {
+          legend: {
+            text: "Do you want to delete this claim and start a new one for a different EU member state?",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        items: [
+          { value: "yes", text: "Yes, delete this claim and start a new one" },
+          { value: "no",  text: "No, return to claim" }
+        ]
+      }) }}
+
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  // Set where each answer goes:
+  var YES_URL = '/aa10-manage-eu-vat-claim';
+  var NO_URL  = '/ra41-eu-vat-claim-details-completed';
+
+  var form = document.getElementById('change-eu-member-state-form');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var selected = form.querySelector('input[name="changeEuMemberState"]:checked');
+
+    if (!selected) {
+      // Basic fallback if nothing selected (keeps it simple without server-side validation)
+      alert('Select yes if you want to delete this claim and start a new one');
+      return;
+    }
+
+    if (selected.value === 'yes') {
+      window.location.href = YES_URL;
+    } else {
+      window.location.href = NO_URL;
+    }
+  });
+})();
+</script>
+{% endblock %}
